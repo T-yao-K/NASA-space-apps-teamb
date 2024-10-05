@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Background BGM Extension",
   "version": "1.0",
   "description": "常にバックグラウンドでBGMをかける拡張機能",
