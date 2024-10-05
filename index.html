@@ -11,13 +11,34 @@
             height: 100%;
         }
         body {
-            background-image: url('background.png');
+            background-image: url('./png/background.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #toggleButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #282c34;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        #toggleButton:hover {
+            background-color: #444b52;
         }
     </style>
 </head>
 <body>
+    <audio id="bgm" src="./audio/audio.mp3" loop></audio>
+    <button id="toggleButton">Pause BGM</button> <!-- 再生／停止ボタン -->
+    <script src="index.js"></script>
 </body>
 </html>
