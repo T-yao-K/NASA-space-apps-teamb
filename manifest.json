@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Background BGM Extension",
   "version": "1.0",
   "description": "常にバックグラウンドでBGMをかける拡張機能",
@@ -14,7 +14,16 @@
     "newtab": "index.html"
   },
   "web_accessible_resources": [
-    "background.png",
-    "audio.mp3"
-  ]
+    {
+      "resources": [
+        "png/background.png",
+        "audio.mp3"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons":{
+    "16": "./png/icon-16.png",
+    "128": "./png/icon-128.png"
+  }
 }
