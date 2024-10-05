@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Background BGM Extension",
   "version": "1.0",
   "description": "新しいタブを開いたときにBGMを再生し、任意で停止できる拡張機能",
