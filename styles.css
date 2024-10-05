@@ -1,47 +1,5 @@
-/* body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
-.container {
-    text-align: center;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-#toggleButton {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-#toggleButton:hover {
-    background-color: #45a049;
-} */
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,11 +29,16 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: #333;
-    margin-bottom: 1rem;
+/* 中央に表示する「Space Browsing」文字のスタイル */
+.main-title {
+    font-size: 48px; /* 文字サイズ */
+    color: #ffffff; /* 白い文字 */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(0, 0, 255, 0.5); /* テキストの外側にぼかし効果を追加 */
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out; /* フェードインアニメーション */
 }
 
+/* BGM再生／停止ボタンのスタイル */
 #toggleButton {
     background-color: #4CAF50;
     border: none;
@@ -93,4 +56,16 @@ h1 {
 
 #toggleButton:hover {
     background-color: #45a049;
+}
+
+/* フェードインアニメーションの定義 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

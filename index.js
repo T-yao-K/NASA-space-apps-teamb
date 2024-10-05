@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgm = document.getElementById('bgm');
     const toggleButton = document.getElementById('toggleButton');
 
+    // 音量の設定（必要に応じて調整）
+    bgm.volume = 0.5;
+
     // 新しいタブを開いたときに自動でBGMを再生
     const playPromise = bgm.play();
 
@@ -10,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         playPromise
             .then(() => {
                 console.log("BGM started playing automatically.");
+                toggleButton.style.display = "inline-block"; // BGMが再生されたらボタンを表示
             })
             .catch(error => {
                 console.warn("BGM playback was prevented due to a browser restriction. User action required.");
                 toggleButton.textContent = "Play BGM"; // 再生がブロックされた場合、ボタンテキストを変更
+                toggleButton.style.display = "inline-block"; // ボタンを表示
             });
     }
 
