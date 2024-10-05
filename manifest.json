@@ -1,16 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Background Changer",
-    "version": "1.0",
-    "description": "Changes the background color of web pages",
-    "permissions": ["activeTab"],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ]
-  }
+  "manifest_version": 2,
+  "name": "Background BGM Extension",
+  "version": "1.0",
+  "description": "常にバックグラウンドでBGMをかける拡張機能",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "permissions": [
+    "background"
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "web_accessible_resources": [
+    "background.png"
+  ]
+}
