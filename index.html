@@ -1,44 +1,42 @@
+<!-- <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGM Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BGM Player</h1>
+        <button id="toggleButton">Pause BGM</button>
+        <audio id="bgm" loop>
+            <source src="audio/audio.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tab</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        body {
-            background-image: url('png/background.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #toggleButton {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #282c34;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin-top: 20px;
-        }
-        #toggleButton:hover {
-            background-color: #444b52;
-        }
-    </style>
+    <title>BGM Player</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <audio id="bgm" src="./audio/audio.mp3" loop></audio>
-    <button id="toggleButton">Pause BGM</button> <!-- 再生／停止ボタン -->
+    <div class="background-image"></div>
+    <div class="container">
+        <h1>BGM Player</h1>
+        <button id="toggleButton">Pause BGM</button>
+        <audio id="bgm" loop>
+            <source src="audio/audio.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
