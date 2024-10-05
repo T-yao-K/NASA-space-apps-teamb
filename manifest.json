@@ -8,12 +8,13 @@
     "persistent": true
   },
   "permissions": [
-    "background"
+    "tabs"
   ],
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
   "web_accessible_resources": [
-    "background.png"
+    "background.png",
+    "audio.mp3"
   ]
 }
