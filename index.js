@@ -37,4 +37,33 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleButton.textContent = "Play BGM"; // 停止中はボタンを「Play」に
         }
     });
+
+    // 時計の更新を行う関数
+    function updateClock() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // 1秒ごとに時計を更新
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 天気情報を表示する関数（サンプルデータ）
+    function updateWeather() {
+        const weatherElement = document.getElementById('weather');
+        // サンプルデータを設定（実際にはAPIからデータを取得）
+        const weatherData = {
+            location: 'Tokyo',
+            temperature: '22°C',
+            description: 'Clear Sky'
+        };
+        weatherElement.textContent = `${weatherData.location}: ${weatherData.temperature} - ${weatherData.description}`;
+    }
+
+    // 天気情報を更新
+    updateWeather();
 });

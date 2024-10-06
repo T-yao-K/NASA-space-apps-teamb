@@ -7,15 +7,46 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- 背景画像の設定 -->
     <div class="background-image"></div>
-    <div class="container">
-        <h1 class="main-title">Space Browsing</h1> <!-- 中央に表示するタイトル要素 -->
+
+    <!-- ナビゲーションタブを左上に配置 -->
+    <div class="navbar">
+        <ul>
+            <li><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+            <li><a href="https://www.google.com" target="_blank">Google</a></li>
+            <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+            <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        </ul>
+    </div>
+
+    <!-- コンテンツを中央に配置するラッパー要素 -->
+    <div class="content-wrapper">
+        <!-- タイトル -->
+        <h1 class="main-title">Space Browsing</h1>
+
+        <!-- 検索バーの追加 -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+        </div>
+
+        <!-- 時計と天気情報の表示エリア -->
+        <div class="info-container">
+            <div id="clock" class="clock"></div> <!-- 時計を表示 -->
+            <div id="weather" class="weather">Loading weather...</div> <!-- 天気情報を表示 -->
+        </div>
+
+        <!-- BGM再生／停止ボタン -->
         <button id="toggleButton" style="display: none;">Pause BGM</button>
+
+        <!-- BGMのオーディオ要素 -->
         <audio id="bgm" loop>
             <source src="audio/audio.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
+
+    <!-- JavaScriptの読み込み -->
     <script src="index.js"></script>
 </body>
 </html>

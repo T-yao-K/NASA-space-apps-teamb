@@ -14,7 +14,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "png/background.png",
+        "png/space.png",
         "audio/audio.mp3"
       ],
       "matches": ["<all_urls>"]
