@@ -46,32 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgm = document.getElementById('bgm');
     bgm.src = selectedSet.bgmSource;
 
-    const toggleButton = document.getElementById('toggleButton');
+    // const toggleButton = document.getElementById('toggleButton');
 
     // 音量の設定（必要に応じて調整）
     bgm.volume = 0.5;
 
     // ボタンを表示
-    toggleButton.style.display = "inline-block";
-    toggleButton.textContent = "Play BGM";
+    // toggleButton.style.display = "inline-block";
+    // toggleButton.textContent = "Play BGM";
 
-    // ボタンで再生／停止を制御
-    toggleButton.addEventListener('click', () => {
-        if (bgm.paused) {
-            bgm.play()
-                .then(() => {
-                    console.log("BGM started playing.");
-                    toggleButton.textContent = "Pause BGM";
-                })
-                .catch(error => {
-                    console.error("BGM playback failed:", error);
-                    toggleButton.textContent = "Play BGM";
-                });
-        } else {
-            bgm.pause();
-            toggleButton.textContent = "Play BGM";
-        }
-    });
+    // // ボタンで再生／停止を制御
+    // toggleButton.addEventListener('click', () => {
+    //     if (bgm.paused) {
+    //         bgm.play()
+    //             .then(() => {
+    //                 console.log("BGM started playing.");
+    //                 toggleButton.textContent = "Pause BGM";
+    //             })
+    //             .catch(error => {
+    //                 console.error("BGM playback failed:", error);
+    //                 toggleButton.textContent = "Play BGM";
+    //             });
+    //     } else {
+    //         bgm.pause();
+    //         toggleButton.textContent = "Play BGM";
+    //     }
+    // });
 
     // 時計の更新を行う関数
     function updateClock() {

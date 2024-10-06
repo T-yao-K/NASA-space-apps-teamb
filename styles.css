@@ -31,9 +31,9 @@ body {
     position: relative;
     z-index: 1;
     padding: 20px;
-    border-radius: 12px;
+    /* border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
 }
 
 /* メインタイトルのスタイル */
@@ -90,9 +90,9 @@ body {
 }
 
 /* ボタンのスタイルをリッチに変更 */
-.styled-button {
+/* .styled-button {
     background: linear-gradient(45deg, #1a73e8, #4285f4, #0b5394); /* グラデーションを使用 */
-    border: none;
+    /* border: none;
     color: #ffffff;
     padding: 15px 32px;
     text-align: center;
@@ -102,14 +102,14 @@ body {
     margin: 20px auto;
     cursor: pointer;
     border-radius: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 立体感を演出 */
-    transition: background 0.3s, transform 0.2s;
-}
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 立体感を演出 */
+    /* transition: background 0.3s, transform 0.2s;
+} */
 
-.styled-button:hover {
-    background: linear-gradient(45deg, #4285f4, #0b5394, #1a73e8); /* 色を反転 */
-    transform: translateY(-3px); /* ホバー時に少し浮かせる */
-}
+/* .styled-button:hover {
+    background: linear-gradient(45deg, #4285f4, #0b5394, #1a73e8); 色を反転 */
+    /* transform: translateY(-3px); ホバー時に少し浮かせる */
+/* } */
 
 /* 彗星の説明文をリッチに表示 */
 .description-card {
@@ -212,7 +212,7 @@ body {
 }
 
 
-/* 禅モードのスタイル */
+/* 禅モードのスタイル
 .content-wrapper.zen-mode {
     opacity: 0;
     pointer-events: none;
@@ -235,4 +235,35 @@ body {
     color: #ffffff;
     margin-top: 10px;
     opacity: 0.7;
+} */
+
+/* 禅モードのスタイル */
+.content-wrapper.zen-mode {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.navbar.zen-mode {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.background-image.zen-mode {
+    filter: brightness(1.2);
+    transition: filter 0.5s ease-in-out;
+}
+
+.zen-mode-instruction {
+    font-size: 14px;
+    color: #ffffff;
+    opacity: 0.7;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
 }

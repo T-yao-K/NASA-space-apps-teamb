@@ -25,8 +25,6 @@
         <!-- タイトル -->
         <h1 class="main-title">Space Browsing</h1>
 
-        <p class="zen-mode-instruction">Press 'Z' to toggle Zen Mode</p>
-
         <!-- 検索バーの追加 -->
         <div class="search-container">
             <input type="text" class="search-bar" id="searchBar" placeholder="Search...">
@@ -39,7 +37,7 @@
         </div>
 
         <!-- BGM再生／停止ボタン -->
-        <button id="toggleButton" class="styled-button" style="display: none;">Pause BGM</button>
+        <!-- <button id="toggleButton" class="styled-button" style="display: none;">Pause BGM</button> -->
 
         <!-- 彗星の説明文の表示 -->
         <div class="description-card">
@@ -49,6 +47,9 @@
         <!-- BGMのオーディオ要素 -->
         <audio id="bgm" loop></audio>
     </div>
+
+    <!-- 禅モードについての説明 -->
+    <p class="zen-mode-instruction">Press 'Z' to toggle Zen Mode</p>
 
     <!-- JavaScriptの読み込み -->
     <script src="index.js"></script>
