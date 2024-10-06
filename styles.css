@@ -149,18 +149,55 @@ body {
 
 .navbar a {
     text-decoration: none;
-    font-size: 16px;
-    padding: 10px 15px;
+    font-size: 18px;
+    padding: 12px 20px;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    background-color: rgba(0, 0, 0, 0.7); /* 背景色を少し濃くする */
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    position: relative;
+    display: inline-block;
 }
 
+/* ツールチップのスタイル */
+.navbar a::after {
+    content: attr(title); /* title属性をツールチップとして表示 */
+    display: none; /* デフォルトは非表示 */
+    position: absolute;
+    top: 150%; /* ボタンの下に表示 */
+    left: 0; /* ツールチップを画面左に寄せる */
+    transform: translateX(0); /* 左端に配置 */
+    white-space: normal; /* 改行を許可してツールチップを表示 */
+    width: 300px; /* ツールチップの幅を設定 */
+    max-width: 300px; /* ツールチップの最大幅を設定 */
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 6px;
+    z-index: 10;
+    word-wrap: break-word; /* 長い単語は折り返す */
+    overflow: hidden; /* テキストの溢れを隠す */
+    text-overflow: ellipsis; /* 溢れたテキストを省略表示 */
+}
+
+/* ホバー時にツールチップを表示する */
+.navbar a:hover::after {
+    display: block; /* ホバー時に表示 */
+}
+
+/* ツールチップが見切れないように左・右位置を調整 */
+.navbar a:hover::after {
+    left: 0; /* 画面の左端にツールチップを固定 */
+}
+
+/* ホバー時のリンクのスタイル */
 .navbar a:hover {
     background-color: rgba(255, 255, 255, 0.8);
     color: #121212;
+    transform: scale(1.05); /* ホバー時に少し拡大 */
 }
+
 
 /* フェードインアニメーション */
 @keyframes fadeIn {
