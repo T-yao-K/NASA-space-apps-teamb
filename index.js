@@ -1,4 +1,4 @@
-// セットのデータを定義
+// データセット（背景画像、説明文、BGMソース）を定義
 const sets = [
     {
         backgroundImage: 'png/space1.png',
@@ -27,25 +27,20 @@ const sets = [
     },
 ];
 
-let isZenMode = false;
+let isZenMode = false; // 禅モードの状態を管理する変数
+let zoomLevel = 1; // 背景画像のズームレベルを管理する変数
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ランダムにセットを選択
+    // 背景画像、説明文、BGMをランダムに設定する
     const selectedSet = sets[Math.floor(Math.random() * sets.length)];
-
-    // 背景画像を設定
     const backgroundImage = document.querySelector('.background-image');
     backgroundImage.style.backgroundImage = `url('${selectedSet.backgroundImage}')`;
 
-    // 説明文を設定
     const descriptionCard = document.querySelector('.description-card');
     descriptionCard.textContent = selectedSet.description;
 
-    // BGMのソースを設定
     const bgm = document.getElementById('bgm');
     bgm.src = selectedSet.bgmSource;
-
-    // 音量の設定（必要に応じて調整）
     bgm.volume = 0.5;
 
     // 時計の更新を行う関数
@@ -72,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         weatherElement.textContent = `${weatherData.location}: ${weatherData.temperature} - ${weatherData.description}`;
     }
-
     updateWeather();
 
     // 検索バーの機能を追加
@@ -102,12 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const moveX = (clientX - centerX) * 0.01;
         const moveY = (clientY - centerY) * 0.01;
 
-        backgroundImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        backgroundImage.style.transform = `translate(${moveX}px, ${moveY}px) scale(${zoomLevel})`; // ズームレベルを適用
     });
 
     // 禅モードのトグル機能を追加
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'z' || event.key === 'Z') {
+        if (event.key === 'z') {
             toggleZenMode();
         }
     });
@@ -137,21 +131,51 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleFullScreen();
 
             // 禅モードに切り替える
-            contentWrapper.classList.add('zen-mode');
-            navbar.classList.add('zen-mode');
-            backgroundImage.classList.add('zen-mode');
-            zenModeInstruction.style.display = 'none'; // 禅モード説明を非表示
+            contentWrapper.style.display = 'none';
+            navbar.style.display = 'none';
+            searchBar.style.display = 'none';
+            descriptionCard.style.display = 'none';
+            zenModeInstruction.style.display = 'none';
+            
+            // 背景画像をズームできるように設定
+            backgroundImage.classList.add('zoom-enabled'); // ズーム機能の有効化クラスを追加
             bgm.play();
         } else {
             // 全画面表示を解除
             toggleFullScreen();
 
             // 通常モードに戻す
-            contentWrapper.classList.remove('zen-mode');
-            navbar.classList.remove('zen-mode');
-            backgroundImage.classList.remove('zen-mode');
-            zenModeInstruction.style.display = 'block'; // 禅モード説明を表示
+            contentWrapper.style.display = 'block';
+            navbar.style.display = 'flex';
+            searchBar.style.display = 'block';
+            descriptionCard.style.display = 'block';
+            zenModeInstruction.style.display = 'block';
+
+            // 背景画像のズームを解除
+            backgroundImage.classList.remove('zoom-enabled');
+            backgroundImage.style.transform = 'scale(1)'; // ズームを元に戻す
+            zoomLevel = 1; // ズームレベルをリセット
             bgm.pause();
         }
     }
+
+    // 背景画像のズームを制御する関数
+    function zoomBackground(event) {
+        if (isZenMode) { // 禅モード時のみズームを有効にする
+            if (event.deltaY < 0) {
+                // スクロールアップ（ズームイン）
+                zoomLevel += 0.1;
+            } else {
+                // スクロールダウン（ズームアウト）
+                zoomLevel -= 0.1;
+                if (zoomLevel < 1) zoomLevel = 1; // ズームレベルが1未満にならないように制御
+            }
+
+            // ズームレベルを背景画像に反映
+            backgroundImage.style.transform = `scale(${zoomLevel})`;
+        }
+    }
+
+    // 禅モード時のみ背景画像をズームできるようにイベントリスナーを追加
+    document.addEventListener('wheel', zoomBackground);
 });

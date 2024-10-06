@@ -267,3 +267,7 @@ body {
     border-radius: 5px;
     z-index: 1000;
 }
+/* 背景画像のズームを有効化するクラス */
+.zoom-enabled {
+    transition: transform 0.2s ease-in-out; /* スムーズなズーム効果 */
+}
