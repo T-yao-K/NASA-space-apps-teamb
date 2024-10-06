@@ -100,3 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // 天気情報を更新
     updateWeather();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backgroundImage = document.querySelector('.background-image');
+    if (!backgroundImage) {
+        console.error("Element with class 'background-image' not found.");
+        return; // 要素が見つからない場合、以降の処理を実行しない
+    }
+
+    document.addEventListener('mousemove', (event) => {
+        const { clientX, clientY } = event;
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        const moveX = (clientX - centerX) * 0.01;
+        const moveY = (clientY - centerY) * 0.01;
+
+        backgroundImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+});
