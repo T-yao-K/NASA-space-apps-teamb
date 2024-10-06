@@ -97,6 +97,23 @@ document.addEventListener('DOMContentLoaded', () => {
         weatherElement.textContent = `${weatherData.location}: ${weatherData.temperature} - ${weatherData.description}`;
     }
 
+    const searchBar = document.getElementById('searchBar');
+    searchBar.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    function performSearch() {
+        const query = document.getElementById('searchBar').value.trim();
+        if (query) {
+            // Google検索へリダイレクト
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.location.href = googleSearchUrl;
+        } else {
+            alert('検索キーワードを入力してください');
+        }
+    }
     // 天気情報を更新
     updateWeather();
 });
