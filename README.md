@@ -1,4 +1,6 @@
 # NASA-space-apps-teamb
+これはNASA Space Apps Challenge in Ube にて作成した作品です。  
+ブラウザであるchrome拡張として実装しました。  
 ## 使い方
 ~~~
 chrome://extensions
