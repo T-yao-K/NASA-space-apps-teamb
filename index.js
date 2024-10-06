@@ -28,6 +28,8 @@ const sets = [
     // 必要に応じて追加のセットを定義
 ];
 
+let isZenMode = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     // ランダムにセットを選択
     const selectedSet = sets[Math.floor(Math.random() * sets.length)];
@@ -135,4 +137,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         backgroundImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
+
+    // 禅モードのトグル機能を追加
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'z' || event.key === 'Z') {
+            toggleZenMode();
+        }
+    });
+
+    function toggleZenMode() {
+        isZenMode = !isZenMode;
+        const contentWrapper = document.querySelector('.content-wrapper');
+        const navbar = document.querySelector('.navbar');
+        const backgroundImage = document.querySelector('.background-image');
+
+        if (isZenMode) {
+            contentWrapper.classList.add('zen-mode');
+            navbar.classList.add('zen-mode');
+            backgroundImage.classList.add('zen-mode');
+            bgm.play();
+        } else {
+            contentWrapper.classList.remove('zen-mode');
+            navbar.classList.remove('zen-mode');
+            backgroundImage.classList.remove('zen-mode');
+            bgm.pause();
+        }
+    }
 });
