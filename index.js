@@ -1,5 +1,49 @@
+// セットのデータを定義
+const sets = [
+    {
+        backgroundImage: 'png/space1.png',
+        description: '渦巻銀河NGC 1433をジェイムズ・ウェッブ宇宙望遠鏡（左上）とハッブル宇宙望遠鏡（右下）で観測した様子',
+        bgmSource: 'audio/space1.wav'
+    },
+    {
+        backgroundImage: 'png/space2.png',
+        description: '画像全体を埋める薄いカーテンのような構造は、星団の星々の光を反射する星間物質で、反射星雲として知られています',
+        bgmSource: 'audio/space2.wav'
+    },
+    {
+        backgroundImage: 'png/space3.png',
+        description: '彗星238P/Readが太陽に近づくにつれて水氷が昇華している様子',
+        bgmSource: 'audio/space3.wav'
+    },
+    {
+        backgroundImage: 'png/space4.png',
+        description: '球状星団内のブラックホールのアーティストによる想像図',
+        bgmSource: 'audio/space4.wav'
+    },
+    {
+        backgroundImage: 'png/space5.png',
+        description: 'ビッグバン後数億年で形成された初期の銀河の周りには、予想以上に密度の高い冷たいガスが存在していたことが観測されました',
+        bgmSource: 'audio/space5.wav'
+    },
+    // 必要に応じて追加のセットを定義
+];
+
 document.addEventListener('DOMContentLoaded', () => {
+    // ランダムにセットを選択
+    const selectedSet = sets[Math.floor(Math.random() * sets.length)];
+
+    // 背景画像を設定
+    const backgroundImage = document.querySelector('.background-image');
+    backgroundImage.style.backgroundImage = `url('${selectedSet.backgroundImage}')`;
+
+    // 説明文を設定
+    const descriptionCard = document.querySelector('.description-card');
+    descriptionCard.textContent = selectedSet.description;
+
+    // BGMのソースを設定
     const bgm = document.getElementById('bgm');
+    bgm.src = selectedSet.bgmSource;
+
     const toggleButton = document.getElementById('toggleButton');
 
     // 音量の設定（必要に応じて調整）

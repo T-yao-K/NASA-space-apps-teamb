@@ -14,8 +14,16 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "png/space.png",
-        "audio/audio.mp3"
+        "png/space1.png",
+        "png/space2.png",
+        "png/space3.png",
+        "png/space4.png",
+        "png/space5.png",
+        "audio/space1.wav.wav",
+        "audio/space2.wav.wav",
+        "audio/space3.wav.wav",
+        "audio/space4.wav.wav",
+        "audio/space5.wav.wav"
       ],
       "matches": ["<all_urls>"]
     }
