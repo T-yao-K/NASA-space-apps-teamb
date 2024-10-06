@@ -28,13 +28,18 @@ const sets = [
 ];
 
 let isZenMode = false; // 禅モードの状態を管理する変数
-let zoomLevel = 1; // 背景画像のズームレベルを管理する変数
+let zoomLevel = 100; // 背景画像のズームレベル（%）を管理する変数。初期値100%
+let originalSearchStyle = {}; // 検索バーの元のスタイルを保存するオブジェクト
+let originX = 50; // ズームの基準となるX位置（%）
+let originY = 50; // ズームの基準となるY位置（%）
 
 document.addEventListener('DOMContentLoaded', () => {
     // 背景画像、説明文、BGMをランダムに設定する
     const selectedSet = sets[Math.floor(Math.random() * sets.length)];
     const backgroundImage = document.querySelector('.background-image');
     backgroundImage.style.backgroundImage = `url('${selectedSet.backgroundImage}')`;
+    backgroundImage.style.backgroundSize = `${zoomLevel}%`;
+    backgroundImage.style.backgroundPosition = `${originX}% ${originY}%`;
 
     const descriptionCard = document.querySelector('.description-card');
     descriptionCard.textContent = selectedSet.description;
@@ -42,6 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgm = document.getElementById('bgm');
     bgm.src = selectedSet.bgmSource;
     bgm.volume = 0.5;
+
+    const searchContainer = document.querySelector('.search-container');
+
+    // 禅モードに入る前の検索バーのスタイルを保存
+    originalSearchStyle = {
+        position: searchContainer.style.position,
+        top: searchContainer.style.top,
+        left: searchContainer.style.left,
+        transform: searchContainer.style.transform,
+        display: searchContainer.style.display
+    };
 
     // 時計の更新を行う関数
     function updateClock() {
@@ -87,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 背景画像をマウス操作で移動させるエフェクト
+    // 背景画像をマウス操作で移動させるエフェクト（通常モード用）
     document.addEventListener('mousemove', (event) => {
         const { clientX, clientY } = event;
         const centerX = window.innerWidth / 2;
@@ -96,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const moveX = (clientX - centerX) * 0.01;
         const moveY = (clientY - centerY) * 0.01;
 
-        backgroundImage.style.transform = `translate(${moveX}px, ${moveY}px) scale(${zoomLevel})`; // ズームレベルを適用
+        backgroundImage.style.backgroundPosition = `${originX + moveX}% ${originY + moveY}%`;
     });
 
     // 禅モードのトグル機能を追加
@@ -153,26 +169,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 背景画像のズームを解除
             backgroundImage.classList.remove('zoom-enabled');
-            backgroundImage.style.transform = 'scale(1)'; // ズームを元に戻す
-            zoomLevel = 1; // ズームレベルをリセット
+            backgroundImage.style.backgroundSize = `100%`; // ズームを元に戻す
+            backgroundImage.style.backgroundPosition = `center center`; // 画像の位置を中央に戻す
+            zoomLevel = 100; // ズームレベルをリセット
+            originX = 50; // ズーム基準位置を中央に戻す
+            originY = 50;
+
+            // 検索バーのスタイルを元に戻す
+            searchBar.style.display = originalSearchStyle.display;
+            searchContainer.style.position = originalSearchStyle.position;
+            searchContainer.style.top = originalSearchStyle.top;
+            searchContainer.style.left = originalSearchStyle.left;
+            searchContainer.style.transform = originalSearchStyle.transform;
+
             bgm.pause();
         }
     }
 
-    // 背景画像のズームを制御する関数
+    // 背景画像のズームを制御する関数（禅モード時）
     function zoomBackground(event) {
         if (isZenMode) { // 禅モード時のみズームを有効にする
+            // マウスの位置を基準にズーム基準を設定
+            const rect = backgroundImage.getBoundingClientRect();
+            const mouseX = ((event.clientX - rect.left) / rect.width) * 100; // マウスのX位置を%で取得
+            const mouseY = ((event.clientY - rect.top) / rect.height) * 100; // マウスのY位置を%で取得
+
             if (event.deltaY < 0) {
                 // スクロールアップ（ズームイン）
-                zoomLevel += 0.1;
+                zoomLevel += 10;
+                if (zoomLevel > 300) zoomLevel = 300; // ズームレベルの上限を設定
             } else {
                 // スクロールダウン（ズームアウト）
-                zoomLevel -= 0.1;
-                if (zoomLevel < 1) zoomLevel = 1; // ズームレベルが1未満にならないように制御
+                zoomLevel -= 10;
+                if (zoomLevel < 100) zoomLevel = 100; // ズームレベルの下限を設定
             }
 
-            // ズームレベルを背景画像に反映
-            backgroundImage.style.transform = `scale(${zoomLevel})`;
+            // ズーム基準位置を設定（ズーム時に画像の拡大をマウス位置で制御）
+            originX = mouseX;
+            originY = mouseY;
+
+            // ズームレベルと位置を背景画像に反映
+            backgroundImage.style.backgroundSize = `${zoomLevel}%`;
+            backgroundImage.style.backgroundPosition = `${originX}% ${originY}%`;
         }
     }
 
