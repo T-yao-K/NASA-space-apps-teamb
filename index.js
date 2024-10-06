@@ -5,36 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 音量の設定（必要に応じて調整）
     bgm.volume = 0.5;
 
-    // 新しいタブを開いたときに自動でBGMを再生
-    const playPromise = bgm.play();
-
-    // 自動再生がブロックされた場合、ボタンを表示して手動再生を促す
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                console.log("BGM started playing automatically.");
-                toggleButton.style.display = "inline-block"; // BGMが再生されたらボタンを表示
-            })
-            .catch(error => {
-                console.warn("BGM playback was prevented due to a browser restriction. User action required.");
-                toggleButton.textContent = "Play BGM"; // 再生がブロックされた場合、ボタンテキストを変更
-                toggleButton.style.display = "inline-block"; // ボタンを表示
-            });
-    }
+    // ボタンを表示
+    toggleButton.style.display = "inline-block";
+    toggleButton.textContent = "Play BGM";
 
     // ボタンで再生／停止を制御
     toggleButton.addEventListener('click', () => {
         if (bgm.paused) {
             bgm.play()
                 .then(() => {
-                    toggleButton.textContent = "Pause BGM"; // 再生中はボタンを「Pause」に
+                    console.log("BGM started playing.");
+                    toggleButton.textContent = "Pause BGM";
                 })
                 .catch(error => {
                     console.error("BGM playback failed:", error);
+                    toggleButton.textContent = "Play BGM";
                 });
         } else {
             bgm.pause();
-            toggleButton.textContent = "Play BGM"; // 停止中はボタンを「Play」に
+            toggleButton.textContent = "Play BGM";
         }
     });
 
