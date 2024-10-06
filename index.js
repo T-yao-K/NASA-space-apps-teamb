@@ -25,7 +25,6 @@ const sets = [
         description: 'ビッグバン後数億年で形成された初期の銀河の周りには、予想以上に密度の高い冷たいガスが存在していたことが観測されました',
         bgmSource: 'audio/space5.wav'
     },
-    // 必要に応じて追加のセットを定義
 ];
 
 let isZenMode = false;
@@ -46,32 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgm = document.getElementById('bgm');
     bgm.src = selectedSet.bgmSource;
 
-    // const toggleButton = document.getElementById('toggleButton');
-
     // 音量の設定（必要に応じて調整）
     bgm.volume = 0.5;
-
-    // ボタンを表示
-    // toggleButton.style.display = "inline-block";
-    // toggleButton.textContent = "Play BGM";
-
-    // // ボタンで再生／停止を制御
-    // toggleButton.addEventListener('click', () => {
-    //     if (bgm.paused) {
-    //         bgm.play()
-    //             .then(() => {
-    //                 console.log("BGM started playing.");
-    //                 toggleButton.textContent = "Pause BGM";
-    //             })
-    //             .catch(error => {
-    //                 console.error("BGM playback failed:", error);
-    //                 toggleButton.textContent = "Play BGM";
-    //             });
-    //     } else {
-    //         bgm.pause();
-    //         toggleButton.textContent = "Play BGM";
-    //     }
-    // });
 
     // 時計の更新を行う関数
     function updateClock() {
@@ -90,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 天気情報を表示する関数（サンプルデータ）
     function updateWeather() {
         const weatherElement = document.getElementById('weather');
-        // サンプルデータを設定（実際にはAPIからデータを取得）
         const weatherData = {
             location: 'Tokyo',
             temperature: '22°C',
@@ -99,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
         weatherElement.textContent = `${weatherData.location}: ${weatherData.temperature} - ${weatherData.description}`;
     }
 
+    updateWeather();
+
+    // 検索バーの機能を追加
     const searchBar = document.getElementById('searchBar');
     searchBar.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
@@ -109,24 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function performSearch() {
         const query = document.getElementById('searchBar').value.trim();
         if (query) {
-            // Google検索へリダイレクト
             const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
             window.location.href = googleSearchUrl;
         } else {
             alert('検索キーワードを入力してください');
         }
     }
-    // 天気情報を更新
-    updateWeather();
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    const backgroundImage = document.querySelector('.background-image');
-    if (!backgroundImage) {
-        console.error("Element with class 'background-image' not found.");
-        return; // 要素が見つからない場合、以降の処理を実行しない
-    }
-
+    // 背景画像をマウス操作で移動させるエフェクト
     document.addEventListener('mousemove', (event) => {
         const { clientX, clientY } = event;
         const centerX = window.innerWidth / 2;
@@ -145,21 +112,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 全画面表示を切り替える関数
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen()
+                .then(() => console.log("Entered full screen mode"))
+                .catch((err) => console.error(`Error attempting to enable full-screen mode: ${err.message}`));
+        } else {
+            document.exitFullscreen()
+                .then(() => console.log("Exited full screen mode"))
+                .catch((err) => console.error(`Error attempting to exit full-screen mode: ${err.message}`));
+        }
+    }
+
+    // 禅モードをトグルする関数
     function toggleZenMode() {
         isZenMode = !isZenMode;
         const contentWrapper = document.querySelector('.content-wrapper');
         const navbar = document.querySelector('.navbar');
-        const backgroundImage = document.querySelector('.background-image');
+        const zenModeInstruction = document.querySelector('.zen-mode-instruction');
 
         if (isZenMode) {
+            // 全画面表示に切り替える
+            toggleFullScreen();
+
+            // 禅モードに切り替える
             contentWrapper.classList.add('zen-mode');
             navbar.classList.add('zen-mode');
             backgroundImage.classList.add('zen-mode');
+            zenModeInstruction.style.display = 'none'; // 禅モード説明を非表示
             bgm.play();
         } else {
+            // 全画面表示を解除
+            toggleFullScreen();
+
+            // 通常モードに戻す
             contentWrapper.classList.remove('zen-mode');
             navbar.classList.remove('zen-mode');
             backgroundImage.classList.remove('zen-mode');
+            zenModeInstruction.style.display = 'block'; // 禅モード説明を表示
             bgm.pause();
         }
     }
