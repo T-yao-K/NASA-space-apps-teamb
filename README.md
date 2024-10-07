@@ -1,7 +1,7 @@
 # NASA-space-apps-teamb
 これはNASA Space Apps Challenge in Ube にて作成した作品です。  
 ブラウザであるchrome拡張として実装しました。  
-NASA Space Apps Challenge Japan Ube会場にて、投票賞を受賞しました！  
+NASA Space Apps Challenge Japan Ube会場にて、投票賞(People's Choice賞)を受賞しました！  
 ## 使い方
 ~~~
 chrome://extensions
