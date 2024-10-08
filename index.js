@@ -74,12 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock();
 
     // 天気情報を表示する関数（サンプルデータ）
-    function updateWeather() {
+    async function updateWeather() {
         const weatherElement = document.getElementById('weather');
+        const res = await fetch("http://api.weatherapi.com/v1/current.json?key=fb0ad9e3e9134f8ba3f112037240710&q=Yamaguchi&aqi=yes")
+        const users = await res.json();
         const weatherData = {
-            location: 'Tokyo',
-            temperature: '22°C',
-            description: 'Clear Sky'
+            location: users.location.region,
+            temperature: users.current.temp_c + '°C',
+            description: users.current.condition.text
         };
         weatherElement.textContent = `${weatherData.location}: ${weatherData.temperature} - ${weatherData.description}`;
     }
